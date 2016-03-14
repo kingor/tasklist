@@ -1,0 +1,31 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:task="urn:import:by.telecom.tasklist.client.ui">
+	<ui:style>
+	
+	</ui:style>
+
+	<g:TabPanel>
+		<g:Tab text="Задачи">
+			<g:DockLayoutPanel unit="EM" width="1000px" height="300px">
+				<g:north size="6.5">
+					<task:EmployeeChooser ui:field='employeeChooser' />
+				</g:north>
+				<g:center>
+					<task:TaskTable ui:field="taskTable" />
+				</g:center>
+			</g:DockLayoutPanel>
+		</g:Tab>
+		<g:Tab text="План">
+			<g:DockLayoutPanel unit="EM" width="1000px" height="300px">
+				<g:north size="8.5">
+					<task:MainChooser ui:field='mainChooser' />
+				</g:north>
+				<g:center>
+					<task:PlanTable ui:field="planTable" />
+				</g:center>
+			</g:DockLayoutPanel>
+		</g:Tab>
+	</g:TabPanel>
+
+</ui:UiBinder> 
