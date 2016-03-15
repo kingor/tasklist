@@ -2,18 +2,31 @@ package by.telecom.tasklist.client.ui;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class TaskPanel extends Composite {
 
 	private static TaskPanelUiBinder uiBinder = GWT.create(TaskPanelUiBinder.class);
+	@UiField
+	MainChooser mainChooser;
+	@UiField
+	PlanTable planTable;
+	@UiField
+	TabPanel tabPanel;
 
 	interface TaskPanelUiBinder extends UiBinder<Widget, TaskPanel> {
 	}
 
 	public TaskPanel() {
 		initWidget(uiBinder.createAndBindUi(this));
+		init();
+	}
+
+	public void init() {
+		tabPanel.selectTab(0);
 	}
 
 }

@@ -5,7 +5,7 @@
 	
 	</ui:style>
 
-	<g:TabPanel>
+	<g:TabPanel ui:field="tabPanel">
 		<g:Tab text="Задачи">
 			<g:DockLayoutPanel unit="EM" width="1000px" height="300px">
 				<g:north size="6.5">

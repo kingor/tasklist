@@ -13,10 +13,10 @@
    http://www.springframework.org/schema/context
    http://www.springframework.org/schema/context/spring-context-4.0.xsd
       ">
- 
- <context:property-placeholder location="/WEB-INF/spring.properties" />
-     
-    <!-- Enable annotation style of managing transactions -->
+
+ <context:property-placeholder location="/WEB-INF/hibernate.properties" />
+
+ <!-- Enable annotation style of managing transactions -->
  <tx:annotation-driven transaction-manager="transactionManager" />
     
     <!-- Declare the Hibernate SessionFactory for retrieving Hibernate sessions -->

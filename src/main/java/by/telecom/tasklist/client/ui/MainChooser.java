@@ -1,15 +1,22 @@
 package by.telecom.tasklist.client.ui;
 
-import java.util.Date;
+import java.util.List;
+
+import by.telecom.tasklist.client.service.EmployeeService;
+import by.telecom.tasklist.client.service.EmployeeServiceAsync;
+import by.telecom.tasklist.shared.model.Employee;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class MainChooser extends Composite {
+
+	private final EmployeeServiceAsync employeeService = GWT.create(EmployeeService.class);
 
 	private static MainChooserUiBinder uiBinder = GWT.create(MainChooserUiBinder.class);
 	@UiField
@@ -26,7 +33,7 @@ public class MainChooser extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		// taskList = new TaskItems();
 		// initMonthList();
-		// initEmployeeList();
+		initEmployeeList();
 	}
 
 	public void initMonthList() {
@@ -48,12 +55,10 @@ public class MainChooser extends Composite {
 		return monthList.getSelectedIndex() + 1;
 	}
 
-	// public void initEmployeeList() {
-	//
-	// for (Employee empl : taskList.getEmployeeList()) {
-	// employeeList.addItem(empl.getName());
-	// }
-	// }
+	public void initEmployeeList() {
+		refreshEmplBox();
+	}
+
 	//
 	// public void initTaskList() {
 	//
@@ -69,11 +74,28 @@ public class MainChooser extends Composite {
 	// employeeList.addItem(empl.getName());
 	// }
 	// }
+	//
+	// public boolean isDayInPeriod(int day, Date begin, Date end) {
+	// Date thisDay = new Date(2015, 1, day);
+	// if (thisDay.after(begin) && thisDay.before(end))
+	// return true;
+	// return false;
+	// }
 
-	public boolean isDayInPeriod(int day, Date begin, Date end) {
-		Date thisDay = new Date(2015, 1, day);
-		if (thisDay.after(begin) && thisDay.before(end))
-			return true;
-		return false;
+	private void refreshEmplBox() {
+		employeeService.getAll(new AsyncCallback<List<Employee>>() {
+			public void onFailure(Throwable caught) {
+				// Show the RPC error message to the user
+			}
+
+			public void onSuccess(List<Employee> employeeAll) {
+				fillEmplBox(employeeAll);
+			}
+		});
+	}
+
+	private void fillEmplBox(List<Employee> employeeAll) {
+		for (Employee empl : employeeAll)
+			employeeList.addItem(empl.getName());
 	}
 }

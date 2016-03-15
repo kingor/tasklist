@@ -2,9 +2,12 @@ package by.telecom.tasklist.shared.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Task {
@@ -17,6 +20,10 @@ public class Task {
 	private Date dateBegin;
 	private Date dateEnd;
 	private Integer complited;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "employeeId")
+	private Employee employee;
 
 	public Task() {
 
@@ -60,6 +67,14 @@ public class Task {
 
 	public void setComplited(Integer complited) {
 		this.complited = complited;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 }

@@ -11,6 +11,17 @@
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
-
+		
+<context:annotation-config />
+  
+ <!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+  For example @Controller and @Service. Make sure to set the correct base-package-->
+ <context:component-scan base-package="by.telecom.subapp" />
+  
+ <!-- Load Hibernate related configuration -->
+ <import resource="hibernate-context.xml" /> 
+ 
+ <!-- Spring security configuration -->
+<!--  <import resource="spring-security.xml" />  -->
 
 </beans>

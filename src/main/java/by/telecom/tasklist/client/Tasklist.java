@@ -102,6 +102,10 @@ public class Tasklist implements EntryPoint {
 				}
 			}
 
+			// private initEmployeeList() {
+			// employeeService.getAll(Employee.class, "name", "asc", );
+			// }
+
 			/**
 			 * Send the name from the nameField to the server and wait for a response.
 			 */
