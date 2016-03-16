@@ -16,7 +16,7 @@
   
  <!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
   For example @Controller and @Service. Make sure to set the correct base-package-->
- <context:component-scan base-package="by.telecom.subapp" />
+ <context:component-scan base-package="by.telecom.tasklist" />
   
  <!-- Load Hibernate related configuration -->
  <import resource="hibernate-context.xml" /> 

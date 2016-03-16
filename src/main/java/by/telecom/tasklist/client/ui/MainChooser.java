@@ -1,6 +1,7 @@
 package by.telecom.tasklist.client.ui;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import by.telecom.tasklist.client.service.EmployeeService;
 import by.telecom.tasklist.client.service.EmployeeServiceAsync;
@@ -18,6 +19,8 @@ public class MainChooser extends Composite {
 
 	private final EmployeeServiceAsync employeeService = GWT.create(EmployeeService.class);
 
+	private final static Logger logger = Logger.getLogger(MainChooser.class.getName());
+
 	private static MainChooserUiBinder uiBinder = GWT.create(MainChooserUiBinder.class);
 	@UiField
 	ListBox monthList;
@@ -33,7 +36,9 @@ public class MainChooser extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		// taskList = new TaskItems();
 		// initMonthList();
+		// System.out.println("MainChooser constructor call");
 		initEmployeeList();
+		employeeList.addItem("111111");
 	}
 
 	public void initMonthList() {
@@ -57,6 +62,8 @@ public class MainChooser extends Composite {
 
 	public void initEmployeeList() {
 		refreshEmplBox();
+		logger.info("!!!!!!!!!!!!!!!!initEmployeeList");
+		employeeList.addItem("initEmployeeList");
 	}
 
 	//
@@ -86,15 +93,21 @@ public class MainChooser extends Composite {
 		employeeService.getAll(new AsyncCallback<List<Employee>>() {
 			public void onFailure(Throwable caught) {
 				// Show the RPC error message to the user
+				logger.info("Servise doesn`t work!!!!!!!!!!!!!!!!!");
+				employeeList.addItem("onFailure");
 			}
 
 			public void onSuccess(List<Employee> employeeAll) {
+				employeeList.addItem("onSuccess");
+				logger.info("EmplServ get all Async");
 				fillEmplBox(employeeAll);
+				logger.info(employeeAll.toString());
 			}
 		});
 	}
 
 	private void fillEmplBox(List<Employee> employeeAll) {
+		logger.info("fillEmplBox calls");
 		for (Employee empl : employeeAll)
 			employeeList.addItem(empl.getName());
 	}

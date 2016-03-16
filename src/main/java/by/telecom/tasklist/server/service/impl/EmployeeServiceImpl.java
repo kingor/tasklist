@@ -1,6 +1,5 @@
 package by.telecom.tasklist.server.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -24,12 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	public List<Employee> getAll() {
 		logger.info("EmployeeService Get all subscriber!");
-		Employee empl = new Employee();
-		empl.setId(1L);
-		empl.setName("Name");
-		List<Employee> list = new ArrayList<Employee>();
-		list.add(empl);
-		return list;// return employeeDao.getAll(Employee.class);
+		return employeeDao.getAll(Employee.class);// return employeeDao.getAll(Employee.class);
 	}
 	//
 	// @Override
