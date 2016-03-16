@@ -7,8 +7,9 @@
 package by.telecom.tasklist.server.dao.impl;
 
 import java.util.List;
+import java.util.logging.Logger;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -28,7 +29,7 @@ public class EmployeeDaoImpl extends GenericDaoImpl<Employee, Long> implements E
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	private static final Logger logger = Logger.getLogger(EmployeeDao.class);
+	private static final Logger logger = Logger.getLogger(EmployeeDao.class.getName());
 
 	@Override
 	public List<Employee> getByParameter(String name, String sortField, String orderType) {

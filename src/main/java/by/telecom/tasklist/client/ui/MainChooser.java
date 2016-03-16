@@ -35,10 +35,8 @@ public class MainChooser extends Composite {
 	public MainChooser() {
 		initWidget(uiBinder.createAndBindUi(this));
 		// taskList = new TaskItems();
-		// initMonthList();
-		// System.out.println("MainChooser constructor call");
+		initMonthList();
 		initEmployeeList();
-		employeeList.addItem("111111");
 	}
 
 	public void initMonthList() {
@@ -63,7 +61,6 @@ public class MainChooser extends Composite {
 	public void initEmployeeList() {
 		refreshEmplBox();
 		logger.info("!!!!!!!!!!!!!!!!initEmployeeList");
-		employeeList.addItem("initEmployeeList");
 	}
 
 	//
@@ -93,15 +90,15 @@ public class MainChooser extends Composite {
 		employeeService.getAll(new AsyncCallback<List<Employee>>() {
 			public void onFailure(Throwable caught) {
 				// Show the RPC error message to the user
-				logger.info("Servise doesn`t work!!!!!!!!!!!!!!!!!");
-				employeeList.addItem("onFailure");
+				logger.info("Async callback don`t work");
+				// employeeList.addItem("onFailure");
 			}
 
 			public void onSuccess(List<Employee> employeeAll) {
-				employeeList.addItem("onSuccess");
-				logger.info("EmplServ get all Async");
+				// employeeList.addItem("onSuccess");
+				logger.info("Async callback is working");
 				fillEmplBox(employeeAll);
-				logger.info(employeeAll.toString());
+				// logger.info(employeeAll.toString());
 			}
 		});
 	}

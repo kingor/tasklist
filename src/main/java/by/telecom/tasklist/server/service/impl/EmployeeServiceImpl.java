@@ -1,8 +1,9 @@
 package by.telecom.tasklist.server.service.impl;
 
 import java.util.List;
+import java.util.logging.Logger;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,12 +18,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	EmployeeDao employeeDao;
 
-	private static final Logger logger = Logger.getLogger(EmployeeService.class);
+	private static final Logger logger = Logger.getLogger(EmployeeService.class.getName());
 
 	@Override
 	@Transactional
 	public List<Employee> getAll() {
-		logger.info("EmployeeService Get all subscriber!");
+		logger.info("SERVICE - EmployeeService Get all subscriber!");
 		return employeeDao.getAll(Employee.class);// return employeeDao.getAll(Employee.class);
 	}
 	//

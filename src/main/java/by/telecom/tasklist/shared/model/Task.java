@@ -1,5 +1,6 @@
 package by.telecom.tasklist.shared.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -10,7 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Task {
+public class Task implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 234601966753194307L;
 
 	@Id
 	@GeneratedValue

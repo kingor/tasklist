@@ -4,6 +4,9 @@ import java.util.List;
 
 import by.telecom.tasklist.shared.model.Task;
 
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+
+@RemoteServiceRelativePath("springGwtServices/taskService")
 public interface TaskService {
 	Long create(Task newInstance);
 
@@ -13,5 +16,5 @@ public interface TaskService {
 
 	void delete(Task persistentObject);
 
-	List<Task> getAll(Class<Task> classT, String sortField, String orderType);
+	public List<Task> getAll();
 }

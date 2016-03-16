@@ -26,7 +26,7 @@
  <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
      p:dataSource-ref="dataSource"
      p:configLocation="${hibernate.config}"
-     p:packagesToScan="by.telecom.subapp"/>
+     p:packagesToScan="by.telecom.tasklist"/>
   
  <!-- Declare a datasource that has pooling capabilities--> 
  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"

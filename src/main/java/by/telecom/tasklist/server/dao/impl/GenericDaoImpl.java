@@ -8,8 +8,9 @@ package by.telecom.tasklist.server.dao.impl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -31,11 +32,11 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	private static final Logger logger = Logger.getLogger(GenericDao.class);
+	private static final Logger logger = Logger.getLogger(GenericDao.class.getName());
 
 	@Override
 	public List<T> getAll(Class classT) {
-		logger.info("getAll entity with ");
+		logger.info("GENERIC DAO - getAll entities ");
 		Session session = null;
 		List<T> all = null;
 		session = sessionFactory.getCurrentSession();
@@ -46,14 +47,14 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
 
 	@Override
 	public PK create(T newInstance) {
-		logger.info("create entity");
+		logger.info("GENERIC DAO - create entity");
 		Session session = sessionFactory.getCurrentSession();
 		return (PK) session.save(newInstance);
 	}
 
 	@Override
 	public T read(Class<T> classT, PK id) {
-		logger.info("read entity with id = " + id);
+		logger.info("GENERIC DAO - read entity with id = " + id);
 		Session session = sessionFactory.getCurrentSession();
 		T objectT = (T) session.createCriteria(classT).add(Restrictions.eq("id", id)).uniqueResult();
 		return objectT;
@@ -61,14 +62,14 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
 
 	@Override
 	public void update(T transientObject) {
-		logger.info("update entity");
+		logger.info("GENERIC DAO - update entity");
 		Session session = sessionFactory.getCurrentSession();
 		session.update(transientObject);
 	}
 
 	@Override
 	public void delete(T persistentObject) {
-		logger.info("delete entity" + persistentObject);
+		logger.info("GENERIC DAO - delete entity" + persistentObject);
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(persistentObject);
 	}
