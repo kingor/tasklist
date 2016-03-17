@@ -8,6 +8,7 @@ package by.telecom.tasklist.server.dao.impl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //import org.apache.log4j.Logger;
@@ -36,7 +37,7 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
 
 	@Override
 	public List<T> getAll(Class classT) {
-		logger.info("GENERIC DAO - getAll entities ");
+		logger.log(Level.INFO, "GENERIC DAO - getAll entities ");
 		Session session = null;
 		List<T> all = null;
 		session = sessionFactory.getCurrentSession();

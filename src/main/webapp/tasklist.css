@@ -38,6 +38,14 @@ h1 {
 	font-size: 5pt;
 }
 
+.busyDay {
+	background-color:#ffc6c6;
+}
+
+.emptyDay {
+	background-color:#ffffff;
+}
+
 .marginItem {
 	margin-bottom: 0.5em;
 }

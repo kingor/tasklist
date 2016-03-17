@@ -8,8 +8,10 @@ import by.telecom.tasklist.client.service.EmployeeServiceAsync;
 import by.telecom.tasklist.shared.model.Employee;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ListBox;
@@ -27,7 +29,17 @@ public class MainChooser extends Composite {
 	@UiField
 	ListBox employeeList;
 
-	// TaskItems taskList;
+	List<Employee> employeeListData;
+
+	private Listener listener;
+
+	public interface Listener {
+		void onItemSelected(Employee employee);
+	}
+
+	public void setListener(Listener listener) {
+		this.listener = listener;
+	}
 
 	interface MainChooserUiBinder extends UiBinder<Widget, MainChooser> {
 	}
@@ -89,15 +101,14 @@ public class MainChooser extends Composite {
 	private void refreshEmplBox() {
 		employeeService.getAll(new AsyncCallback<List<Employee>>() {
 			public void onFailure(Throwable caught) {
-				// Show the RPC error message to the user
 				logger.info("Async callback don`t work");
-				// employeeList.addItem("onFailure");
 			}
 
 			public void onSuccess(List<Employee> employeeAll) {
 				// employeeList.addItem("onSuccess");
 				logger.info("Async callback is working");
 				fillEmplBox(employeeAll);
+				employeeListData = employeeAll;
 				// logger.info(employeeAll.toString());
 			}
 		});
@@ -108,4 +119,18 @@ public class MainChooser extends Composite {
 		for (Employee empl : employeeAll)
 			employeeList.addItem(empl.getName());
 	}
+
+	@UiHandler("employeeList")
+	void onChange(ClickEvent event) {
+		// Select the row that was clicked (-1 to account for header row).
+		int index = employeeList.getSelectedIndex();
+		// if (index != -1) {
+		index = 1;
+		Employee employee = employeeListData.get(index);
+		if (listener != null) {
+			listener.onItemSelected(employee);
+		}
+		// }
+	}
+
 }

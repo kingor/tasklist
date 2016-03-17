@@ -1,5 +1,7 @@
 package by.telecom.tasklist.client.ui;
 
+import by.telecom.tasklist.shared.model.Employee;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -23,6 +25,11 @@ public class TaskPanel extends Composite {
 	public TaskPanel() {
 		initWidget(uiBinder.createAndBindUi(this));
 		init();
+		mainChooser.setListener(new MainChooser.Listener() {
+			public void onItemSelected(Employee employee) {
+				planTable.refreshPlanTable(employee);
+			}
+		});
 	}
 
 	public void init() {
