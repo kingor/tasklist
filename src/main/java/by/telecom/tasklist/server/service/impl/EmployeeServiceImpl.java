@@ -24,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	public List<Employee> getAll() {
 		logger.info("SERVICE - EmployeeService Get all subscriber!");
-		return employeeDao.getAll(Employee.class);// return employeeDao.getAll(Employee.class);
+		return employeeDao.getAll(Employee.class);// getAll(Employee.class);
 	}
 	//
 	// @Override

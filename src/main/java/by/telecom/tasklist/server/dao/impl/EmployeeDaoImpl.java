@@ -9,7 +9,6 @@ package by.telecom.tasklist.server.dao.impl;
 import java.util.List;
 import java.util.logging.Logger;
 
-//import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -46,4 +45,13 @@ public class EmployeeDaoImpl extends GenericDaoImpl<Employee, Long> implements E
 		return all;
 	}
 
+	@Override
+	public List<Employee> getById(Long id) {
+		Session session = null;
+		List<Employee> all = null;
+		session = sessionFactory.getCurrentSession();
+
+		all = session.createCriteria(Employee.class).add(Restrictions.eq("id", id)).list();
+		return all;
+	}
 }

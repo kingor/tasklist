@@ -56,6 +56,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
+	@Transactional
 	public List<Task> getByEmployee(Employee employee) {
 		logger.info("SERVICE - Get tasks by employee!");
 		return taskDao.getByEmployee(employee);

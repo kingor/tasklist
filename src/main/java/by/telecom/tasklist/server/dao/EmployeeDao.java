@@ -17,4 +17,6 @@ import by.telecom.tasklist.shared.model.Employee;
 public interface EmployeeDao extends GenericDao<Employee, Long> {
 
 	List<Employee> getByParameter(String name, String sort, String orderType);
+
+	List<Employee> getById(Long id);
 }

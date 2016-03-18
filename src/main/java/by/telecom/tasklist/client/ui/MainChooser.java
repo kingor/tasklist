@@ -125,7 +125,7 @@ public class MainChooser extends Composite {
 		// Select the row that was clicked (-1 to account for header row).
 		int index = employeeList.getSelectedIndex();
 		// if (index != -1) {
-		index = 1;
+		// index = 1;
 		Employee employee = employeeListData.get(index);
 		if (listener != null) {
 			listener.onItemSelected(employee);

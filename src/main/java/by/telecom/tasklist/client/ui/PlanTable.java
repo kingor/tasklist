@@ -58,8 +58,10 @@ public class PlanTable extends Composite {
 	}
 
 	public void refreshPlanTable(Employee employee) {
-		// taskService.getByEmployee(employee, new AsyncCallback<List<Task>>() {
-		taskService.getAll(new AsyncCallback<List<Task>>() {
+		logger.info("EMPLOYEE - " + employee.getName());
+		taskService.getByEmployee(employee, new AsyncCallback<List<Task>>() {
+			// taskService.getAll(new AsyncCallback<List<Task>>() {
+
 			public void onFailure(Throwable caught) {
 				logger.info("Async callback don`t work");
 			}
@@ -73,6 +75,8 @@ public class PlanTable extends Composite {
 
 	private void fillPlanTable(List<Task> taskList) {
 		logger.info("METHOD - fillPlanTable called");
+		planTable.removeAllRows();
+		initTable();
 		int row = 1;
 		for (Task task : taskList) {
 			planTable.getRowFormatter().setStyleName(row, "emptyDay");

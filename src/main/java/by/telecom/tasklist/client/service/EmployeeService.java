@@ -12,6 +12,8 @@ public interface EmployeeService extends RemoteService {
 
 	public List<Employee> getAll();
 
+	// public List<Employee> getById(Long id);
+
 	// Long create(Employee employee);
 	//
 	// Employee read(Long id);

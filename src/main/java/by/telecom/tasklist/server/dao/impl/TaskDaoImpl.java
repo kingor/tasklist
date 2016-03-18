@@ -1,6 +1,5 @@
 package by.telecom.tasklist.server.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -20,7 +19,6 @@ public class TaskDaoImpl extends GenericDaoImpl<Task, Long> implements TaskDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
 	private static final Logger logger = Logger.getLogger(TaskDao.class.getName());
 
 	@Override
@@ -37,15 +35,24 @@ public class TaskDaoImpl extends GenericDaoImpl<Task, Long> implements TaskDao {
 
 	@Override
 	public List<Task> getByEmployee(Employee employee) {
-		logger.info("DAO - Get task by employee");
-
-		Session session;
-		logger.info("DAO - after session decloration");
+		// // logger.info("DAO - Get task by employee");
+		// Session session = null;
+		// // logger.info("DAO - after session decloration");
+		// try {
+		// logger.info("Session factory" + sessionFactory.toString());
+		// // session = sessionFactory.getCurrentSession();
+		// } catch (Exception e) {
+		// logger.info("EXCEPTION" + e.getStackTrace());
+		// }
+		//
+		// logger.info("DAO - after session");
+		// List<Task> taskList = session.createCriteria(Task.class)/* .add(Restrictions.eq("employee", employee)) */.list();
+		// return taskList;
+		Session session = null;
+		List<Task> all = null;
 		session = sessionFactory.getCurrentSession();
-		logger.info("DAO - after session");
-		List<Task> taskList = new ArrayList<Task>();
-		session.createCriteria(Task.class)/* .add(Restrictions.eq("employee", employee)) */.list();
-		return taskList;
-	}
 
+		all = session.createCriteria(Task.class).add(Restrictions.eq("employee", employee)).list();
+		return all;
+	}
 }
