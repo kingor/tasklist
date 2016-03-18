@@ -7,7 +7,7 @@
 
 	<g:TabPanel ui:field="tabPanel">
 		<g:Tab text="Задачи">
-			<g:DockLayoutPanel unit="EM" width="1000px" height="300px">
+			<g:DockLayoutPanel unit="EM" width="1000px" height="400px">
 				<g:north size="6.5">
 					<task:EmployeeChooser ui:field='employeeChooser' />
 				</g:north>
@@ -17,7 +17,7 @@
 			</g:DockLayoutPanel>
 		</g:Tab>
 		<g:Tab text="План">
-			<g:DockLayoutPanel unit="EM" width="1000px" height="300px">
+			<g:DockLayoutPanel unit="EM" width="1000px" height="400px">
 				<g:north size="8.5">
 					<task:MainChooser ui:field='mainChooser' />
 				</g:north>

@@ -8,7 +8,7 @@ import by.telecom.tasklist.client.service.EmployeeServiceAsync;
 import by.telecom.tasklist.shared.model.Employee;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -75,29 +75,6 @@ public class MainChooser extends Composite {
 		logger.info("!!!!!!!!!!!!!!!!initEmployeeList");
 	}
 
-	//
-	// public void initTaskList() {
-	//
-	// for (Task task : taskList.getTaskList()) {
-	// ;
-	// }
-	// }
-	//
-	// @UiHandler("employeeList")
-	// void onEmployeeListChange(ChangeEvent event) {
-	//
-	// for (Employee empl : taskList.getEmployeeList()) {
-	// employeeList.addItem(empl.getName());
-	// }
-	// }
-	//
-	// public boolean isDayInPeriod(int day, Date begin, Date end) {
-	// Date thisDay = new Date(2015, 1, day);
-	// if (thisDay.after(begin) && thisDay.before(end))
-	// return true;
-	// return false;
-	// }
-
 	private void refreshEmplBox() {
 		employeeService.getAll(new AsyncCallback<List<Employee>>() {
 			public void onFailure(Throwable caught) {
@@ -121,16 +98,21 @@ public class MainChooser extends Composite {
 	}
 
 	@UiHandler("employeeList")
-	void onChange(ClickEvent event) {
+	void onChange(ChangeEvent event) {
+		selectEmployee();
+	}
+
+	// @UiHandler("employeeList")
+	// void onInit(InitializeEvent event) {
+	// selectEmployee();
+	// }
+
+	private void selectEmployee() {
 		// Select the row that was clicked (-1 to account for header row).
 		int index = employeeList.getSelectedIndex();
-		// if (index != -1) {
-		// index = 1;
 		Employee employee = employeeListData.get(index);
 		if (listener != null) {
 			listener.onItemSelected(employee);
 		}
-		// }
 	}
-
 }

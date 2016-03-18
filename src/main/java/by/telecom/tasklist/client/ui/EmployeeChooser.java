@@ -8,8 +8,10 @@ import by.telecom.tasklist.client.service.EmployeeServiceAsync;
 import by.telecom.tasklist.shared.model.Employee;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ListBox;
@@ -28,6 +30,18 @@ public class EmployeeChooser extends Composite {
 
 	@UiField
 	ListBox employeeList;
+
+	List<Employee> employeeListData;
+
+	private Listener listener;
+
+	public interface Listener {
+		void onItemSelected(Employee employee);
+	}
+
+	public void setListener(Listener listener) {
+		this.listener = listener;
+	}
 
 	public EmployeeChooser() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -51,7 +65,7 @@ public class EmployeeChooser extends Composite {
 				// employeeList.addItem("onSuccess");
 				logger.info("Async callback is working");
 				fillEmplBox(employeeAll);
-				// logger.info(employeeAll.toString());
+				employeeListData = employeeAll;
 			}
 		});
 	}
@@ -60,6 +74,20 @@ public class EmployeeChooser extends Composite {
 		logger.info("fillEmplBox calls");
 		for (Employee empl : employeeAll)
 			employeeList.addItem(empl.getName());
+	}
+
+	@UiHandler("employeeList")
+	void onChange(ChangeEvent event) {
+		selectEmployee();
+	}
+
+	private void selectEmployee() {
+		// Select the row that was clicked (-1 to account for header row).
+		int index = employeeList.getSelectedIndex();
+		Employee employee = employeeListData.get(index);
+		if (listener != null) {
+			listener.onItemSelected(employee);
+		}
 	}
 
 }

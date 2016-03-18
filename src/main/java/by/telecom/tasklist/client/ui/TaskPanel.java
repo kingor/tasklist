@@ -15,6 +15,8 @@ public class TaskPanel extends Composite {
 	@UiField
 	MainChooser mainChooser;
 	@UiField
+	EmployeeChooser employeeChooser;
+	@UiField
 	PlanTable planTable;
 	@UiField
 	TabPanel tabPanel;
@@ -30,6 +32,12 @@ public class TaskPanel extends Composite {
 				planTable.refreshPlanTable(employee);
 			}
 		});
+
+		// employeeChooser.setListener(new EmployeeChooser().Listener() {
+		// public void onItemSelected(Employee employee) {
+		// planTable.refreshPlanTable(employee);
+		// }
+		// });
 	}
 
 	public void init() {
