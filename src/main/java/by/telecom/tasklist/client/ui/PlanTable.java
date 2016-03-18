@@ -58,8 +58,8 @@ public class PlanTable extends Composite {
 	}
 
 	public void refreshPlanTable(Employee employee) {
-		taskService.getByEmployee(employee, new AsyncCallback<List<Task>>() {
-			// taskService.getAll(new AsyncCallback<List<Task>>() {
+		// taskService.getByEmployee(employee, new AsyncCallback<List<Task>>() {
+		taskService.getAll(new AsyncCallback<List<Task>>() {
 			public void onFailure(Throwable caught) {
 				logger.info("Async callback don`t work");
 			}
@@ -82,6 +82,7 @@ public class PlanTable extends Composite {
 			Date dateEnd = task.getDateEnd();
 			int day = 1;
 			for (day = 1; day <= 31; day++) {
+				planTable.getCellFormatter().setStyleName(row, day + 1, "emptyDay");
 				Date today = new Date(115, 0, day);
 				if (isBusyDay(dateBegin, dateEnd, today))
 					stilizeCell(row, day + 1);
