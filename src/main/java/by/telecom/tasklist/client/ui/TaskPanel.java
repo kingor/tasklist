@@ -14,12 +14,12 @@ public class TaskPanel extends Composite {
 	private static TaskPanelUiBinder uiBinder = GWT.create(TaskPanelUiBinder.class);
 	@UiField
 	MainChooser mainChooser;
-	@UiField
-	EmployeeChooser employeeChooser;
+	// @UiField
+	// EmployeeChooser employeeChooser;
 	@UiField
 	PlanTable planTable;
-	@UiField
-	TaskTable taskTable;
+	// @UiField
+	// TaskTable taskTable;
 	@UiField
 	TabPanel tabPanel;
 
@@ -35,11 +35,11 @@ public class TaskPanel extends Composite {
 			}
 		});
 
-		employeeChooser.setListener(new EmployeeChooser.Listener() {
-			public void onItemSelected(Employee employee) {
-				taskTable.refreshTaskTable(employee);
-			}
-		});
+		// employeeChooser.setListener(new EmployeeChooser.Listener() {
+		// public void onItemSelected(Employee employee) {
+		// taskTable.refreshTaskTable(employee);
+		// }
+		// });
 	}
 
 	public void init() {

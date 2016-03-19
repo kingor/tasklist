@@ -53,6 +53,10 @@ public class EmployeeChooser extends Composite {
 		logger.info("!!!!!!!!!!!!!!!!initEmployeeList");
 	}
 
+	public void setData(List<Employee> data) {
+		fillEmplBox(data);
+	}
+
 	private void refreshEmplBox() {
 		employeeService.getAll(new AsyncCallback<List<Employee>>() {
 			public void onFailure(Throwable caught) {
