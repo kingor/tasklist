@@ -27,8 +27,6 @@ public class PlanTable extends Composite {
 	@UiField
 	FlexTable planTable;
 
-	private int month;
-
 	interface PlanTableUiBinder extends UiBinder<Widget, PlanTable> {
 	}
 

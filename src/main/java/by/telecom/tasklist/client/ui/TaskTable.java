@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import by.telecom.tasklist.client.service.TaskService;
 import by.telecom.tasklist.client.service.TaskServiceAsync;
+import by.telecom.tasklist.shared.model.Employee;
 import by.telecom.tasklist.shared.model.Task;
 
 import com.google.gwt.core.client.GWT;
@@ -34,7 +35,7 @@ public class TaskTable extends Composite {
 	public TaskTable() {
 		initWidget(uiBinder.createAndBindUi(this));
 		initTable();
-		refreshPlanTable();
+
 	}
 
 	public void initTable() {
@@ -49,9 +50,9 @@ public class TaskTable extends Composite {
 
 	}
 
-	public void refreshPlanTable(/* Employee employee */) {
+	public void refreshTaskTable(Employee employee) {
 		// logger.info("EMPLOYEE - " + employee.getName());
-		taskService.getAll(new AsyncCallback<List<Task>>() {
+		taskService.getByEmployee(employee, new AsyncCallback<List<Task>>() {
 			// taskService.getAll(new AsyncCallback<List<Task>>() {
 
 			public void onFailure(Throwable caught) {
