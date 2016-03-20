@@ -102,11 +102,6 @@ public class MainChooser extends Composite {
 		selectEmployee();
 	}
 
-	// @UiHandler("employeeList")
-	// void onInit(InitializeEvent event) {
-	// selectEmployee();
-	// }
-
 	private void selectEmployee() {
 		// Select the row that was clicked (-1 to account for header row).
 		int index = employeeList.getSelectedIndex();

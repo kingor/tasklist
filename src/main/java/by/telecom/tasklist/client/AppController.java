@@ -2,7 +2,6 @@ package by.telecom.tasklist.client;
 
 import by.telecom.tasklist.client.presenter.EmployeePresenter;
 import by.telecom.tasklist.client.presenter.Presenter;
-import by.telecom.tasklist.client.service.EmployeeServiceAsync;
 import by.telecom.tasklist.client.ui.FirstPanel;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -14,12 +13,12 @@ import com.google.gwt.user.client.ui.HasWidgets;
 public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	private final HandlerManager eventBus;
-	private final EmployeeServiceAsync rpcService;
+	// private EmployeeServiceAsync rpcService;
 	private HasWidgets container;
 
-	public AppController(HandlerManager eventBus, EmployeeServiceAsync rpcService) {
+	public AppController(HandlerManager eventBus) {
 		this.eventBus = eventBus;
-		this.rpcService = rpcService;
+		// this.rpcService = rpcService;
 		bind();
 	}
 
@@ -35,6 +34,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	private void bind() {
 		History.addValueChangeHandler(this);
+
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			Presenter presenter = null;
 
 			if (token.equals("list")) {
-				presenter = new EmployeePresenter(rpcService, eventBus, new FirstPanel());
+				presenter = new EmployeePresenter(eventBus, new FirstPanel());
 			}
 
 			if (presenter != null) {

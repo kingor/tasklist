@@ -18,15 +18,14 @@
 		<g:Tab text="Задачи">
 			<g:DockLayoutPanel unit="EM" width="800px" height="400px">
 				<g:north size="6.5">
-					<!-- <g:VerticalPanel> styleName='{style.radius}'-->
-					<g:DecoratorPanel >
+					<!-- <g:VerticalPanel> styleName='{style.radius}' -->
+					<g:DecoratorPanel>
 						<g:FlowPanel styleName='{style.radius}'>
 							<g:Label text="Планирование задач сотрудника"
 								horizontalAlignment="ALIGN_CENTER" styleName='marginItem' />
 							<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER"
 								verticalAlignment="ALIGN_MIDDLE">
-								<g:Label text="Сотрудник" horizontalAlignment="ALIGN_LEFT"
-									width="80px" />
+								<g:Label text="Сотрудник" horizontalAlignment="ALIGN_LEFT" width="80px" />
 								<g:ListBox ui:field="employeeList" width="100px" />
 							</g:HorizontalPanel>
 						</g:FlowPanel>
@@ -34,15 +33,16 @@
 					<!-- </g:VerticalPanel> -->
 				</g:north>
 				<g:center>
-					<g:VerticalPanel styleName='{style.radius2}'
-						height="300px">
+				<g:DecoratorPanel>
+					<g:VerticalPanel height="300px">
 						<g:FlexTable borderWidth="1" ui:field="taskTable" />
 					</g:VerticalPanel>
+					</g:DecoratorPanel>
 				</g:center>
 			</g:DockLayoutPanel>
 		</g:Tab>
 		<g:Tab text="План">
-			<g:DockLayoutPanel unit="EM" width="800px" height="400px">
+			<g:DockLayoutPanel unit="EM" width="980px" height="400px">
 				<g:north size="8.5">
 					<g:DecoratorPanel>
 						<g:FlowPanel styleName='{style.radius}'>
@@ -51,23 +51,23 @@
 							<g:HorizontalPanel styleName='marginItem'
 								horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
 								<g:Label text="Сотрудник" horizontalAlignment="ALIGN_LEFT"
-									width="80px" />
+									width="70px" />
 								<g:ListBox ui:field="employeeList2" width="100px" />
 							</g:HorizontalPanel>
 							<g:HorizontalPanel horizontalAlignment="ALIGN_LEFT"
 								verticalAlignment="ALIGN_MIDDLE">
 								<g:Label text="Месяц" horizontalAlignment="ALIGN_LEFT"
-									width="80px" />
-								<g:ListBox ui:field="monthList" width="100px" />
+									width="70px" />
+								<g:ListBox ui:field="monthList" width="80px" />
 							</g:HorizontalPanel>
 						</g:FlowPanel>
-						</g:DecoratorPanel>
+					</g:DecoratorPanel>
 				</g:north>
 				<g:center>
-				<g:DecoratorPanel>
-					<g:VerticalPanel height="280px">
-						<g:FlexTable borderWidth="1" ui:field="planTable" />
-					</g:VerticalPanel>
+					<g:DecoratorPanel>
+						<g:VerticalPanel height="280px">
+							<g:FlexTable borderWidth="1" ui:field="planTable" />
+						</g:VerticalPanel>
 					</g:DecoratorPanel>
 				</g:center>
 			</g:DockLayoutPanel>
