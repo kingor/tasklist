@@ -1,8 +1,6 @@
 package by.telecom.tasklist.client.presenter;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 import by.telecom.tasklist.client.service.EmployeeService;
 import by.telecom.tasklist.client.service.EmployeeServiceAsync;
@@ -21,86 +19,49 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
-public class EmployeePresenter implements Presenter {
+public class TaskTabPresenter implements Presenter {
 
 	public interface Display {
 		void setEmployeeList(List<Employee> employeeData);
 
-		void setPlanList(List<Task> taskData);
-
 		void setTaskList(List<Task> taskList);
-
-		void setMonthList(List<String> monthList);
 
 		int getChangedRow();
 
 		HasChangeHandlers getEmployeeComboBox();
 
-		HasChangeHandlers getEmployeeComboBox2Tab();
-
 		Widget asWidget();
 	}
 
-	private static final String[] MONTHS = { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Ноябрь", "Декабрь" };
-
-	private final static Logger logger = Logger.getLogger(EmployeePresenter.class.getName());
+	private final Display display;
 	private List<Employee> employeeAll;
 	private EmployeeServiceAsync emplRpcService = GWT.create(EmployeeService.class);
 	private TaskServiceAsync taskRpcService = GWT.create(TaskService.class);
+
 	// private final HandlerManager eventBus;
-	private final Display display;
+
+	public TaskTabPresenter(Display display, HandlerManager eventBus) {
+		this.display = display;
+		// this.eventBus = eventBus;
+	}
 
 	@Override
 	public void go(HasWidgets container) {
 		container.add(display.asWidget());
 		fetchEmployeeAll(emplRpcService);
-		refreshPlanTable(taskRpcService);
-		// chooseSelectedEmployee(taskRpcService);
-		setMonthOfYear();
 		bind();
-	}
-
-	public EmployeePresenter(HandlerManager eventBus, Display display) {
-		// this.eventBus = eventBus;
-		this.display = display;
 	}
 
 	private void fetchEmployeeAll(EmployeeServiceAsync rpcService) {
 		rpcService.getAll(new AsyncCallback<List<Employee>>() {
 			public void onFailure(Throwable caught) {
-				logger.info("Async callback don`t work");
+				// logger.info("Async callback don`t work");
 			}
 
 			public void onSuccess(List<Employee> emplAll) {
-				logger.info("Async callback is working");
+				// logger.info("Async callback is working");
 				display.setEmployeeList(emplAll);
 				employeeAll = emplAll;
-			}
-		});
-	}
-
-	public void refreshTaskTable(TaskServiceAsync rpcService/* , Employee employee */) {
-		rpcService.getAll(new AsyncCallback<List<Task>>() {
-			public void onFailure(Throwable caught) {
-				logger.info("Async callback don`t work");
-			}
-
-			public void onSuccess(List<Task> taskList) {
-				logger.info("Async callback is working");
-				display.setTaskList(taskList);
-			}
-		});
-	}
-
-	public void refreshPlanTable(TaskServiceAsync rpcService/* , Employee employee */) {
-		rpcService.getAll(new AsyncCallback<List<Task>>() {
-			public void onFailure(Throwable caught) {
-				logger.info("Async callback don`t work");
-			}
-
-			public void onSuccess(List<Task> taskList) {
-				logger.info("Async callback is working");
-				display.setPlanList(taskList);
 			}
 		});
 	}
@@ -115,13 +76,6 @@ public class EmployeePresenter implements Presenter {
 			}
 		});
 
-		display.getEmployeeComboBox2Tab().addChangeHandler(new ChangeHandler() {
-
-			@Override
-			public void onChange(ChangeEvent event) {
-				chooseSelectedEmployee(taskRpcService);
-			}
-		});
 	}
 
 	private void chooseSelectedEmployee(TaskServiceAsync rpcService) {
@@ -140,7 +94,4 @@ public class EmployeePresenter implements Presenter {
 		});
 	}
 
-	private void setMonthOfYear() {
-		display.setMonthList(Arrays.asList(MONTHS));
-	}
 }

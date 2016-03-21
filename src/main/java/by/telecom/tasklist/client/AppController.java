@@ -2,7 +2,7 @@ package by.telecom.tasklist.client;
 
 import by.telecom.tasklist.client.presenter.EmployeePresenter;
 import by.telecom.tasklist.client.presenter.Presenter;
-import by.telecom.tasklist.client.ui.FirstPanel;
+import by.telecom.tasklist.server.other.FirstPanel;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;

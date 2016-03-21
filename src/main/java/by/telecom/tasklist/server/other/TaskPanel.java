@@ -1,4 +1,4 @@
-package by.telecom.tasklist.client.ui;
+package by.telecom.tasklist.server.other;
 
 import by.telecom.tasklist.shared.model.Employee;
 

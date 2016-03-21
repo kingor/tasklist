@@ -1,4 +1,4 @@
-package by.telecom.tasklist.client.ui;
+package by.telecom.tasklist.server.other;
 
 import java.util.List;
 import java.util.logging.Logger;

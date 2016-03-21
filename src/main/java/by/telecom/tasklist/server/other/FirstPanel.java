@@ -1,4 +1,4 @@
-package by.telecom.tasklist.client.ui;
+package by.telecom.tasklist.server.other;
 
 import java.util.Date;
 import java.util.List;
@@ -93,7 +93,6 @@ public class FirstPanel extends Composite implements EmployeePresenter.Display {
 
 	@Override
 	public void setPlanList(List<Task> taskData) {
-		// logger.info("METHOD - fillPlanTable called");
 		planTable.removeAllRows();
 		initPlanTable();
 		int row = 1;
@@ -154,9 +153,13 @@ public class FirstPanel extends Composite implements EmployeePresenter.Display {
 	}
 
 	@Override
+	public HasChangeHandlers getEmployeeComboBox2Tab() {
+		return employeeList2;
+	}
+
+	@Override
 	public void setMonthList(List<String> months) {
 		for (String month : months)
 			monthList.addItem(month);
 	}
-
 }
