@@ -1,9 +1,10 @@
-package by.telecom.tasklist.client.presenter;
+package by.telecom.tasklist.server.other;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import by.telecom.tasklist.client.presenter.Presenter;
 import by.telecom.tasklist.client.service.EmployeeService;
 import by.telecom.tasklist.client.service.EmployeeServiceAsync;
 import by.telecom.tasklist.client.service.TaskService;

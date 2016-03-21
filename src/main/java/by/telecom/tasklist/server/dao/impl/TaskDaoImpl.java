@@ -1,5 +1,6 @@
 package by.telecom.tasklist.server.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -53,6 +54,16 @@ public class TaskDaoImpl extends GenericDaoImpl<Task, Long> implements TaskDao {
 		session = sessionFactory.getCurrentSession();
 
 		all = session.createCriteria(Task.class).add(Restrictions.eq("employee", employee)).list();
+		return all;
+	}
+
+	@Override
+	public List<Task> getByEmployeeMonth(Employee employee, Date monthBegin, Date monthEnd) {
+		Session session = null;
+		List<Task> all = null;
+		session = sessionFactory.getCurrentSession();
+
+		all = session.createCriteria(Task.class).add(Restrictions.eq("employee", employee)).add(Restrictions.le("dateBegin", monthEnd)).add(Restrictions.ge("dateEnd", monthBegin)).list();
 		return all;
 	}
 }

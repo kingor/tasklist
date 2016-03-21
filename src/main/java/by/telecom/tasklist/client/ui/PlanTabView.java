@@ -72,7 +72,7 @@ public class PlanTabView extends Composite implements PlanTabPresenter.Display {
 			int day = 1;
 			for (day = 1; day <= 31; day++) {
 				planTable.getCellFormatter().setStyleName(row, day + 1, "emptyDay");
-				Date today = new Date(115, 0, day);
+				Date today = new Date(115, getMonthRow(), day);
 				if (isBusyDay(dateBegin, dateEnd, today))
 					stilizeCell(row, day + 1);
 			}
@@ -109,6 +109,14 @@ public class PlanTabView extends Composite implements PlanTabPresenter.Display {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int getMonthRow() {
+		int selectedMonth = 0;
+		selectedMonth = monthList.getSelectedIndex();
+
+		return selectedMonth;
 	}
 
 }

@@ -1,5 +1,6 @@
 package by.telecom.tasklist.server.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -60,6 +61,14 @@ public class TaskServiceImpl implements TaskService {
 	public List<Task> getByEmployee(Employee employee) {
 		logger.info("SERVICE - Get tasks by employee!");
 		return taskDao.getByEmployee(employee);
+	}
+
+	@Override
+	@Transactional
+	public List<Task> getByEmployeeMonth(Employee employee, Date dateBegin, Date dateEnd) {
+		logger.info("SERVICE - Get tasks by employee and month!");
+		return taskDao.getByEmployeeMonth(employee, dateBegin, dateEnd);
+		// return taskDao.getByEmployee(employee);
 	}
 
 }

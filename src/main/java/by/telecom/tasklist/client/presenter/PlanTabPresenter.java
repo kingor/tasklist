@@ -1,6 +1,7 @@
 package by.telecom.tasklist.client.presenter;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import by.telecom.tasklist.client.service.EmployeeService;
@@ -33,6 +34,8 @@ public class PlanTabPresenter implements Presenter {
 
 		int getChangedRow();
 
+		int getMonthRow();
+
 		Widget asWidget();
 	}
 
@@ -52,14 +55,14 @@ public class PlanTabPresenter implements Presenter {
 	@Override
 	public void go(HasWidgets container) {
 		container.add(display.asWidget());
-		fetchEmployeeAll(emplRpcService);
+		fetchEmployeeAll();
 		setMonthOfYear();
 		bind();
 
 	}
 
-	private void fetchEmployeeAll(EmployeeServiceAsync rpcService) {
-		rpcService.getAll(new AsyncCallback<List<Employee>>() {
+	private void fetchEmployeeAll() {
+		emplRpcService.getAll(new AsyncCallback<List<Employee>>() {
 			public void onFailure(Throwable caught) {
 				// logger.info("Async callback don`t work");
 			}
@@ -68,6 +71,7 @@ public class PlanTabPresenter implements Presenter {
 				// logger.info("Async callback is working");
 				display.setEmployeeList(emplAll);
 				employeeAll = emplAll;
+				chooseSelectedEmployeeMonth(0, 0);
 			}
 		});
 	}
@@ -78,17 +82,22 @@ public class PlanTabPresenter implements Presenter {
 
 			@Override
 			public void onChange(ChangeEvent event) {
-				chooseSelectedEmployee(taskRpcService);
+				chooseSelectedEmployeeMonth(display.getChangedRow(), display.getMonthRow());
 			}
 		});
 
 	}
 
-	private void chooseSelectedEmployee(TaskServiceAsync rpcService) {
-		int selectedRow = display.getChangedRow();
+	private void chooseSelectedEmployeeMonth(int selectedRow, int month) {
 		Employee employee = employeeAll.get(selectedRow);
-
-		taskRpcService.getByEmployee(employee, new AsyncCallback<List<Task>>() {
+		Date firstDay = getFirstDay(month);
+		Date lastDay = getLastDay(month);
+		// Date firstDay = new Date(115, 0, 1);
+		// Date lastDay = new Date(115, 0, 30);
+		Window.alert(String.valueOf(firstDay.toString()));
+		Window.alert(String.valueOf(lastDay.toString()));
+		// taskRpcService.getByEmployee(employee, new AsyncCallback<List<Task>>() {
+		taskRpcService.getByEmployeeMonth(employee, firstDay, lastDay, new AsyncCallback<List<Task>>() {
 			public void onFailure(Throwable caught) {
 				Window.alert("Error deleting selected contacts");
 			}
@@ -105,4 +114,13 @@ public class PlanTabPresenter implements Presenter {
 		display.setMonthList(Arrays.asList(MONTHS));
 	}
 
+	private Date getFirstDay(int month) {
+		Date firstDay = new Date(2015 - 1900, month, 1);
+		return firstDay;
+	}
+
+	private Date getLastDay(int month) {
+		Date firstDay = new Date(2015 - 1900, month + 1, 0);
+		return firstDay;
+	}
 }

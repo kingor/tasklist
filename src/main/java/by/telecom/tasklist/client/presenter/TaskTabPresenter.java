@@ -48,12 +48,13 @@ public class TaskTabPresenter implements Presenter {
 	@Override
 	public void go(HasWidgets container) {
 		container.add(display.asWidget());
-		fetchEmployeeAll(emplRpcService);
+		fetchEmployeeAll();
 		bind();
+
 	}
 
-	private void fetchEmployeeAll(EmployeeServiceAsync rpcService) {
-		rpcService.getAll(new AsyncCallback<List<Employee>>() {
+	private void fetchEmployeeAll() {
+		emplRpcService.getAll(new AsyncCallback<List<Employee>>() {
 			public void onFailure(Throwable caught) {
 				// logger.info("Async callback don`t work");
 			}
@@ -62,6 +63,7 @@ public class TaskTabPresenter implements Presenter {
 				// logger.info("Async callback is working");
 				display.setEmployeeList(emplAll);
 				employeeAll = emplAll;
+				chooseSelectedEmployee(0);
 			}
 		});
 	}
@@ -69,29 +71,29 @@ public class TaskTabPresenter implements Presenter {
 	private void bind() {
 
 		display.getEmployeeComboBox().addChangeHandler(new ChangeHandler() {
-
 			@Override
 			public void onChange(ChangeEvent event) {
-				chooseSelectedEmployee(taskRpcService);
+				chooseSelectedEmployee(display.getChangedRow());
 			}
 		});
 
 	}
 
-	private void chooseSelectedEmployee(TaskServiceAsync rpcService) {
-		int selectedRow = display.getChangedRow();
-		Employee employee = employeeAll.get(selectedRow);
+	private void chooseSelectedEmployee(int selectedRow) {
+		if (!employeeAll.isEmpty()) {
+			Employee employee = employeeAll.get(selectedRow);
+			taskRpcService.getByEmployee(employee, new AsyncCallback<List<Task>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("Error deleting selected contacts");
+				}
 
-		taskRpcService.getByEmployee(employee, new AsyncCallback<List<Task>>() {
-			public void onFailure(Throwable caught) {
-				Window.alert("Error deleting selected contacts");
-			}
-
-			@Override
-			public void onSuccess(List<Task> result) {
-				display.setTaskList(result);
-			}
-		});
+				@Override
+				public void onSuccess(List<Task> result) {
+					display.setTaskList(result);
+				}
+			});
+		} else
+			Window.alert("Нет сотрудников в базе");
 	}
 
 }

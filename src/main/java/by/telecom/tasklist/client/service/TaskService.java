@@ -1,5 +1,6 @@
 package by.telecom.tasklist.client.service;
 
+import java.util.Date;
 import java.util.List;
 
 import by.telecom.tasklist.shared.model.Employee;
@@ -21,4 +22,6 @@ public interface TaskService extends RemoteService {
 	public List<Task> getAll();
 
 	public List<Task> getByEmployee(Employee employee);
+
+	public List<Task> getByEmployeeMonth(Employee employee, Date dateBegin, Date dateEnd);
 }

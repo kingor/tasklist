@@ -3,7 +3,6 @@ package by.telecom.tasklist.server.other;
 import java.util.Date;
 import java.util.List;
 
-import by.telecom.tasklist.client.presenter.EmployeePresenter;
 import by.telecom.tasklist.shared.model.Employee;
 import by.telecom.tasklist.shared.model.Task;
 
