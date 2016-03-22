@@ -33,10 +33,9 @@ public class PlanTabView extends Composite implements PlanTabPresenter.Display {
 
 	public PlanTabView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		initPlanTable();
 	}
 
-	public void initPlanTable() {
+	public void initPlanTable(int lastDay) {
 		planTable.getColumnFormatter().setWidth(0, "20px");
 		planTable.getColumnFormatter().setWidth(1, "300px");
 		planTable.setText(0, 0, "ИД");
@@ -44,7 +43,7 @@ public class PlanTabView extends Composite implements PlanTabPresenter.Display {
 		planTable.getRowFormatter().setStyleName(0, "header");
 
 		int day = 1;
-		for (day = 1; day <= 31; day++) {
+		for (day = 1; day <= lastDay; day++) {
 			planTable.getColumnFormatter().setWidth(day + 1, "19px");
 			planTable.setText(0, day + 1, String.valueOf(day));
 		}
@@ -59,24 +58,30 @@ public class PlanTabView extends Composite implements PlanTabPresenter.Display {
 	}
 
 	@Override
-	public void setPlanList(List<Task> taskData) {
+	public void setPlanList(List<Task> taskData, int lastDay) {
 		planTable.removeAllRows();
-		initPlanTable();
-		int row = 1;
-		for (Task task : taskData) {
-			planTable.getRowFormatter().setStyleName(row, "emptyDay");
-			planTable.setText(row, 0, String.valueOf(task.getId()));
-			planTable.setText(row, 1, task.getName());
-			Date dateBegin = task.getDateBegin();
-			Date dateEnd = task.getDateEnd();
-			int day = 1;
-			for (day = 1; day <= 31; day++) {
-				planTable.getCellFormatter().setStyleName(row, day + 1, "emptyDay");
-				Date today = new Date(115, getMonthRow(), day);
-				if (isBusyDay(dateBegin, dateEnd, today))
-					stilizeCell(row, day + 1);
+
+		if (!taskData.isEmpty()) {
+			initPlanTable(lastDay);
+			int row = 1;
+			for (Task task : taskData) {
+				planTable.getRowFormatter().setStyleName(row, "emptyDay");
+				planTable.setText(row, 0, String.valueOf(task.getId()));
+				planTable.setText(row, 1, task.getName());
+				Date dateBegin = task.getDateBegin();
+				Date dateEnd = task.getDateEnd();
+				int day = 1;
+				for (day = 1; day <= lastDay; day++) {
+					planTable.getCellFormatter().setStyleName(row, day + 1, "emptyDay");
+					Date today = new Date(115, getMonthRow(), day);
+					if (isBusyDay(dateBegin, dateEnd, today))
+						stilizeCell(row, day + 1);
+				}
+				row++;
 			}
-			row++;
+		} else {
+			planTable.setText(0, 1, "Нет задач в этом месяце");
+			planTable.setWidth("300px");
 		}
 	}
 

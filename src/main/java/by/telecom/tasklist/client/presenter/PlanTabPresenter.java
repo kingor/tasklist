@@ -26,9 +26,11 @@ public class PlanTabPresenter implements Presenter {
 	public interface Display {
 		void setEmployeeList(List<Employee> employeeData);
 
-		void setPlanList(List<Task> taskData);
+		void setPlanList(List<Task> taskData, int day);
 
 		void setMonthList(List<String> monthList);
+
+		// void initPlanTable(int day);
 
 		HasChangeHandlers getEmployeeComboBox();
 
@@ -98,6 +100,7 @@ public class PlanTabPresenter implements Presenter {
 		Employee employee = employeeAll.get(selectedRow);
 		Date firstDay = getFirstDay(month);
 		Date lastDay = getLastDay(month);
+		final int day = lastDay.getDate();
 		taskRpcService.getByEmployeeMonth(employee, firstDay, lastDay, new AsyncCallback<List<Task>>() {
 			public void onFailure(Throwable caught) {
 				Window.alert("Error deleting selected contacts");
@@ -105,7 +108,7 @@ public class PlanTabPresenter implements Presenter {
 
 			@Override
 			public void onSuccess(List<Task> result) {
-				display.setPlanList(result);
+				display.setPlanList(result, day);
 			}
 		});
 	}
@@ -120,7 +123,7 @@ public class PlanTabPresenter implements Presenter {
 	}
 
 	private Date getLastDay(int month) {
-		Date firstDay = new Date(YEAR - 1900, month + 1, 0);
-		return firstDay;
+		Date lastDay = new Date(YEAR - 1900, month + 1, 0);
+		return lastDay;
 	}
 }

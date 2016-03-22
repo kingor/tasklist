@@ -6,6 +6,7 @@
 		padding: 10px;
 		border-spacing: 10px;
 	}
+	
 	</ui:style>
 	<g:DockLayoutPanel unit="EM" width="980px" height="400px">
 				<g:north size="8.5">
