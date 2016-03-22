@@ -3,8 +3,8 @@ package by.telecom.tasklist.server.dao;
 import java.util.Date;
 import java.util.List;
 
-import by.telecom.tasklist.shared.model.Employee;
-import by.telecom.tasklist.shared.model.Task;
+import by.telecom.tasklist.shared.domain.Employee;
+import by.telecom.tasklist.shared.domain.Task;
 
 public interface TaskDao extends GenericDao<Task, Long> {
 

@@ -21,14 +21,11 @@ public class Tasklist implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		HandlerManager eventBus = new HandlerManager(null);
-		// AppController appViewer = new AppController(eventBus);
-		// appViewer.go(RootPanel.get("task"));
-		// Presenter taskPresenter = new EmployeePresenter(new HandlerManager(null), new FirstPanel());
 		TaskTabView taskView = new TaskTabView();
 		PlanTabView planView = new PlanTabView();
 		Presenter taskPresenter = new TaskTabPresenter(taskView, eventBus);
 		Presenter planPresenter = new PlanTabPresenter(planView, eventBus);
-		// presenter.go(RootPanel.get("task"));
+
 		TabPanel tabPanel = new TabPanel();
 
 		VerticalPanel t1 = new VerticalPanel();

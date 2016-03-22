@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import by.telecom.tasklist.client.service.TaskService;
 import by.telecom.tasklist.server.dao.TaskDao;
-import by.telecom.tasklist.shared.model.Employee;
-import by.telecom.tasklist.shared.model.Task;
+import by.telecom.tasklist.shared.domain.Employee;
+import by.telecom.tasklist.shared.domain.Task;
 
 @Service("taskService")
 public class TaskServiceImpl implements TaskService {

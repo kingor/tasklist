@@ -3,6 +3,7 @@ package by.telecom.tasklist.server.service.impl;
 import java.util.List;
 import java.util.logging.Logger;
 
+
 //import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import by.telecom.tasklist.client.service.EmployeeService;
 import by.telecom.tasklist.server.dao.EmployeeDao;
-import by.telecom.tasklist.shared.model.Employee;
+import by.telecom.tasklist.shared.domain.Employee;
 
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService {

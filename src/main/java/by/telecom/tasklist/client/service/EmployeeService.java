@@ -2,7 +2,7 @@ package by.telecom.tasklist.client.service;
 
 import java.util.List;
 
-import by.telecom.tasklist.shared.model.Employee;
+import by.telecom.tasklist.shared.domain.Employee;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

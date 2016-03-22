@@ -8,7 +8,7 @@ package by.telecom.tasklist.server.dao;
 
 import java.util.List;
 
-import by.telecom.tasklist.shared.model.Employee;
+import by.telecom.tasklist.shared.domain.Employee;
 
 /**
  *

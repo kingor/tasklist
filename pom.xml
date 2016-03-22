@@ -17,6 +17,7 @@
 		<org.hibernate.version>4.3.5.Final</org.hibernate.version>
 		<mysql.version>5.1.37</mysql.version>
 		<spring4gwt.version>0.0.1</spring4gwt.version>
+		<hsqldb.version>2.3.3</hsqldb.version>
 
 		<!-- GWT needs at least java 1.7 -->
 		<maven.compiler.source>1.7</maven.compiler.source>
@@ -140,6 +141,14 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+
+		<!-- HyperSonic DB -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
+		</dependency>
+
 
 	</dependencies>
 

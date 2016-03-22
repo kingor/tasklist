@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import by.telecom.tasklist.server.dao.TaskDao;
-import by.telecom.tasklist.shared.model.Employee;
-import by.telecom.tasklist.shared.model.Task;
+import by.telecom.tasklist.shared.domain.Employee;
+import by.telecom.tasklist.shared.domain.Task;
 
 @Repository
 public class TaskDaoImpl extends GenericDaoImpl<Task, Long> implements TaskDao {

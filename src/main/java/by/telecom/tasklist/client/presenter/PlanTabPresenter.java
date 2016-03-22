@@ -8,8 +8,8 @@ import by.telecom.tasklist.client.service.EmployeeService;
 import by.telecom.tasklist.client.service.EmployeeServiceAsync;
 import by.telecom.tasklist.client.service.TaskService;
 import by.telecom.tasklist.client.service.TaskServiceAsync;
-import by.telecom.tasklist.shared.model.Employee;
-import by.telecom.tasklist.shared.model.Task;
+import by.telecom.tasklist.shared.domain.Employee;
+import by.telecom.tasklist.shared.domain.Task;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -32,13 +32,16 @@ public class PlanTabPresenter implements Presenter {
 
 		HasChangeHandlers getEmployeeComboBox();
 
-		int getChangedRow();
+		HasChangeHandlers getMonthComboBox();
+
+		int getChangedEmployee();
 
 		int getMonthRow();
 
 		Widget asWidget();
 	}
 
+	private static final int YEAR = 2015;
 	private static final String[] MONTHS = { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Ноябрь", "Декабрь" };
 	private final Display display;
 	private List<Employee> employeeAll;
@@ -78,13 +81,16 @@ public class PlanTabPresenter implements Presenter {
 
 	private void bind() {
 
-		display.getEmployeeComboBox().addChangeHandler(new ChangeHandler() {
+		ChangeHandler changeHandler = new ChangeHandler() {
 
 			@Override
 			public void onChange(ChangeEvent event) {
-				chooseSelectedEmployeeMonth(display.getChangedRow(), display.getMonthRow());
+				chooseSelectedEmployeeMonth(display.getChangedEmployee(), display.getMonthRow());
 			}
-		});
+		};
+
+		display.getEmployeeComboBox().addChangeHandler(changeHandler);
+		display.getMonthComboBox().addChangeHandler(changeHandler);
 
 	}
 
@@ -92,11 +98,6 @@ public class PlanTabPresenter implements Presenter {
 		Employee employee = employeeAll.get(selectedRow);
 		Date firstDay = getFirstDay(month);
 		Date lastDay = getLastDay(month);
-		// Date firstDay = new Date(115, 0, 1);
-		// Date lastDay = new Date(115, 0, 30);
-		Window.alert(String.valueOf(firstDay.toString()));
-		Window.alert(String.valueOf(lastDay.toString()));
-		// taskRpcService.getByEmployee(employee, new AsyncCallback<List<Task>>() {
 		taskRpcService.getByEmployeeMonth(employee, firstDay, lastDay, new AsyncCallback<List<Task>>() {
 			public void onFailure(Throwable caught) {
 				Window.alert("Error deleting selected contacts");
@@ -107,7 +108,6 @@ public class PlanTabPresenter implements Presenter {
 				display.setPlanList(result);
 			}
 		});
-
 	}
 
 	private void setMonthOfYear() {
@@ -115,12 +115,12 @@ public class PlanTabPresenter implements Presenter {
 	}
 
 	private Date getFirstDay(int month) {
-		Date firstDay = new Date(2015 - 1900, month, 1);
+		Date firstDay = new Date(YEAR - 1900, month, 1); // формат года для объекта Data (текущий год - 1900)
 		return firstDay;
 	}
 
 	private Date getLastDay(int month) {
-		Date firstDay = new Date(2015 - 1900, month + 1, 0);
+		Date firstDay = new Date(YEAR - 1900, month + 1, 0);
 		return firstDay;
 	}
 }

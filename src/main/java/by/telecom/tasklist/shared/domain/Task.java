@@ -1,4 +1,4 @@
-package by.telecom.tasklist.shared.model;
+package by.telecom.tasklist.shared.domain;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 import by.telecom.tasklist.client.service.EmployeeService;
 import by.telecom.tasklist.client.service.EmployeeServiceAsync;
-import by.telecom.tasklist.shared.model.Employee;
+import by.telecom.tasklist.shared.domain.Employee;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;

@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import by.telecom.tasklist.client.presenter.PlanTabPresenter;
-import by.telecom.tasklist.shared.model.Employee;
-import by.telecom.tasklist.shared.model.Task;
+import by.telecom.tasklist.shared.domain.Employee;
+import by.telecom.tasklist.shared.domain.Task;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
@@ -93,7 +93,7 @@ public class PlanTabView extends Composite implements PlanTabPresenter.Display {
 	}
 
 	@Override
-	public int getChangedRow() {
+	public int getChangedEmployee() {
 		int selectedRow = -1;
 		selectedRow = employeeList.getSelectedIndex();
 
@@ -117,6 +117,11 @@ public class PlanTabView extends Composite implements PlanTabPresenter.Display {
 		selectedMonth = monthList.getSelectedIndex();
 
 		return selectedMonth;
+	}
+
+	@Override
+	public HasChangeHandlers getMonthComboBox() {
+		return monthList;
 	}
 
 }

@@ -3,8 +3,8 @@ package by.telecom.tasklist.client.ui;
 import java.util.List;
 
 import by.telecom.tasklist.client.presenter.TaskTabPresenter;
-import by.telecom.tasklist.shared.model.Employee;
-import by.telecom.tasklist.shared.model.Task;
+import by.telecom.tasklist.shared.domain.Employee;
+import by.telecom.tasklist.shared.domain.Task;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasChangeHandlers;

@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import by.telecom.tasklist.server.dao.EmployeeDao;
-import by.telecom.tasklist.shared.model.Employee;
+import by.telecom.tasklist.shared.domain.Employee;
 
 /**
  *
